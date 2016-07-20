@@ -1,0 +1,14 @@
+{
+  "name": "purescript-redux-utils",
+  "version": "1.0.0",
+  "private": true,
+  "files": [],
+  "scripts": {
+    "build": "pulp build"
+  },
+  "devDependencies": {
+    "purescript": "^0.9.1",
+    "pulp": "^9.0.1",
+    "bower": "^1.7.9"
+  }
+}

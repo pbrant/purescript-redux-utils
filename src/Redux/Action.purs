@@ -8,7 +8,7 @@ module Redux.Action
   , getState
   ) where
 
-import Prelude (Unit, pure, bind)
+import Prelude (Unit, pure, bind, ($))
 
 import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Class (liftEff)
@@ -17,7 +17,8 @@ import Control.Monad.Aff (Aff, launchAff)
 import Control.Monad.Reader.Trans (ReaderT, ask, reader, runReaderT)
 
 import Data.Foreign (Foreign)
-import Data.Function (Fn0, runFn0)
+import Data.Function.Uncurried (Fn0, runFn0)
+import Data.Functor (void)
 import Data.Tuple (Tuple(Tuple))
 
 foreign import data DISPATCH :: !
@@ -54,7 +55,7 @@ asyncAction
 asyncAction a =
   makeAsyncAction
   \dispatch' getState' ->
-    launchAff (runReaderT a (Tuple dispatch' getState'))
+    void $ launchAff (runReaderT a (Tuple dispatch' getState'))
 
 -- | Dispatch a pure Action within an Async Action.
 -- |
